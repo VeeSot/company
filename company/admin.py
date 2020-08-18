@@ -74,8 +74,14 @@ class EmployeeAdmin(UserAdmin):
     # )
 
 
+class BranchEmployeeInline(admin.TabularInline):
+    model = Branch.employees.through
+    extra = 1
+
+
 class BranchAdmin(admin.ModelAdmin):
-    model = Branch
+    inlines = [BranchEmployeeInline]
+    fields = ('name', 'facade_image', 'longitude', 'latitude')
 
 
 admin.site.register(Employee, EmployeeAdmin)

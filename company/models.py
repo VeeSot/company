@@ -17,3 +17,10 @@ class Branch(models.Model):
                                      verbose_name="Facade image")
     longitude = models.FloatField(db_index=True,verbose_name="Longitude")
     latitude = models.FloatField(db_index=True,verbose_name="Latitude")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Branch"
+        verbose_name_plural = "Branches"

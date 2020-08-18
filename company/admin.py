@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from .forms import EmployeeChangeForm, EmployeeCreationForm
-from .models import Employee
+from .models import Employee, Branch
 
 
 class SimpleTextFilter(admin.SimpleListFilter):
@@ -74,4 +74,9 @@ class EmployeeAdmin(UserAdmin):
     # )
 
 
+class BranchAdmin(admin.ModelAdmin):
+    model = Branch
+
+
 admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(Branch, BranchAdmin)

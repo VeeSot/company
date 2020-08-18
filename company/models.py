@@ -8,7 +8,7 @@ class Employee(AbstractUser):
 
     class Meta:
         verbose_name = "Employee"
-        verbose_name_plural = "Employee"
+        verbose_name_plural = "Employees"
 
 
 class Branch(models.Model):

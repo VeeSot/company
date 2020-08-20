@@ -117,6 +117,7 @@ USE_TZ = True
 try:
     from .local_settings import STATIC_URL
     assert 'http' in STATIC_URL
-except (ImportError, AssertionError):
+except (ImportError, AssertionError) as e:
+    logging.exception(e) # FIXME:I think it have to sent to a monitoring system
     logging.warning("Will be used a local filesystem"),
     STATIC_URL = '/static/'

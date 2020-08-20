@@ -3,3 +3,4 @@
 *.pyc
 *.sqlite3
 uploads
+/company/local_settings.py

@@ -1,5 +1,10 @@
+import logging
+from functools import lru_cache
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+from company.extra import MediaStorage
 
 
 class Employee(AbstractUser):
@@ -13,10 +18,11 @@ class Employee(AbstractUser):
 
 class Branch(models.Model):
     name = models.CharField(max_length=100, verbose_name="Branch name")
-    facade_image = models.ImageField(null=True,upload_to ='uploads/',
+    facade_image = models.ImageField(null=True, upload_to='images/',
+                                     storage=MediaStorage(),
                                      verbose_name="Facade image")
-    longitude = models.FloatField(db_index=True,verbose_name="Longitude")
-    latitude = models.FloatField(db_index=True,verbose_name="Latitude")
+    longitude = models.FloatField(db_index=True, verbose_name="Longitude")
+    latitude = models.FloatField(db_index=True, verbose_name="Latitude")
     employees = models.ManyToManyField(Employee, verbose_name='Employees')
 
     def __str__(self):

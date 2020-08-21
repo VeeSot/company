@@ -9,16 +9,11 @@
         }
     </style>
     <script>
-        function createIcon(pathToIcon) {
-            if (!pathToIcon) {
-                pathToIcon = ''
-            }
-            const icon = L.icon({
-                iconUrl: pathToIcon,
-                shadowUrl: pathToIcon,
+        function createIcon(iconUrl) {
+            return L.icon({
+                iconUrl: iconUrl,
                 iconSize: [20, 20], // size of the icon
-            });
-            return icon
+            })
         }
 
         function map_init_basic(map, options) {
@@ -28,11 +23,11 @@
                     data.forEach(function putBranchOnMap(aboutBranch) {
                         let longitude = aboutBranch.longitude;
                         let latitude = aboutBranch.latitude;
-                        let pathToIcon = aboutBranch.facade_image;
-                        if (!pathToIcon) {
+                        let iconUrl = aboutBranch.url;
+                        if (!iconUrl) {
                             L.marker([latitude, longitude]).addTo(map);
                         } else {
-                            let icon = createIcon(aboutBranch.facade_image);
+                            let icon = createIcon(iconUrl);
                             L.marker([latitude, longitude], {icon: icon}).addTo(map);
                         }
 

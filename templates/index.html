@@ -1,14 +1,50 @@
 {% load leaflet_tags %}
 <html>
-  <head>
+<head>
     {% leaflet_js %}
     {% leaflet_css %}
     <style>
-      .leaflet-container { height: 100%; }
+        .leaflet-container {
+            height: 100%;
+        }
     </style>
-  </head>
-  <body>
-    <h1>Company Branches</h1>
-    {% leaflet_map "app" %}
-  </body>
+    <script>
+        function createIcon(pathToIcon) {
+            if (!pathToIcon) {
+                pathToIcon = ''
+            }
+            const icon = L.icon({
+                iconUrl: pathToIcon,
+                shadowUrl: pathToIcon,
+                iconSize: [20, 20], // size of the icon
+            });
+            return icon
+        }
+
+        function map_init_basic(map, options) {
+            let response = fetch('/api/v1/branches');
+            response.then(response => response.json())
+                .then(function (data) {
+                    data.forEach(function putBranchOnMap(aboutBranch) {
+                        let longitude = aboutBranch.longitude;
+                        let latitude = aboutBranch.latitude;
+                        let pathToIcon = aboutBranch.facade_image;
+                        if (!pathToIcon) {
+                            L.marker([latitude, longitude]).addTo(map);
+                        } else {
+                            let icon = createIcon(aboutBranch.facade_image);
+                            L.marker([latitude, longitude], {icon: icon}).addTo(map);
+                        }
+
+
+                    });
+
+                })
+        }
+    </script>
+</head>
+<body>
+<h1>Company Branches</h1>
+{% leaflet_map "app" callback="window.map_init_basic" %}
+</body>
 </html>

@@ -113,11 +113,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# Try to use external storage(like Amazon S3)
 try:
-    from .local_settings import STATIC_URL
-    assert 'http' in STATIC_URL
+    # We would rather use an external storage(like Amazon S3)
+    from company.local_settings import *  # NOQA
+    assert 'STATIC_URL' in locals(), 'You should set a external STATIC_URL'
 except (ImportError, AssertionError) as e:
-    logging.exception(e) # FIXME:I think it have to sent to a monitoring system
+    logging.exception(e)  # FIXME:I think it have to sent to a monitoring system
     logging.warning("Will be used a local filesystem"),
     STATIC_URL = '/static/'

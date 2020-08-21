@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'leaflet',
     'company'
 ]
 AUTH_USER_MODEL = 'company.Employee'

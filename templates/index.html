@@ -1,0 +1,14 @@
+{% load leaflet_tags %}
+<html>
+  <head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <style>
+      .leaflet-container { height: 100%; }
+    </style>
+  </head>
+  <body>
+    <h1>Company Branches</h1>
+    {% leaflet_map "app" %}
+  </body>
+</html>
